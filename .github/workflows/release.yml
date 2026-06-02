@@ -2,8 +2,12 @@ name: Release
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - "claude/confident-einstein-eo154"
+    paths:
+      - "dist/**"
+      - "manifest.json"
+      - ".github/workflows/release.yml"
   workflow_dispatch:
     inputs:
       tag:
@@ -26,11 +30,15 @@ jobs:
             test -f "$f" || { echo "Missing $f"; exit 1; }
           done
 
+      - name: Read version from manifest
+        id: ver
+        run: echo "tag=$(node -p "require('./manifest.json').version")" >> "$GITHUB_OUTPUT"
+
       - name: Create release with plugin files
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ inputs.tag || github.ref_name }}
-          name: Email to Task ${{ inputs.tag || github.ref_name }}
+          tag_name: ${{ inputs.tag || steps.ver.outputs.tag }}
+          name: Email to Task ${{ inputs.tag || steps.ver.outputs.tag }}
           body: |
             Obsidian **Email to Task** plugin.
 
