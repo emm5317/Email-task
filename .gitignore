@@ -1,0 +1,11 @@
+# npm
+node_modules/
+package-lock.json
+
+# build output at repo root (the committed artifact lives in dist/)
+/main.js
+/main.js.map
+
+# misc
+.DS_Store
+*.log

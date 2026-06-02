@@ -1,0 +1,9 @@
+{
+	"id": "email-to-task",
+	"name": "Email to Task",
+	"version": "0.1.0",
+	"minAppVersion": "1.4.0",
+	"description": "Watches the vault for dropped .eml/.msg files and converts each into a Markdown note with a Tasks-plugin-compatible checkbox.",
+	"author": "eric.m.makinen",
+	"isDesktopOnly": true
+}

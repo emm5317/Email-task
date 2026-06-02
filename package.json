@@ -1,0 +1,35 @@
+{
+	"name": "obsidian-email-to-task",
+	"version": "0.1.0",
+	"description": "Convert dropped .eml/.msg emails into Tasks-plugin-compatible Markdown notes.",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"test": "node tests/run.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"deploy": "node esbuild.config.mjs production && node scripts/copy-dist.mjs"
+	},
+	"keywords": [
+		"obsidian",
+		"email",
+		"tasks",
+		"eml",
+		"msg"
+	],
+	"author": "eric.m.makinen",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^20.11.0",
+		"@types/turndown": "^5.0.6",
+		"builtin-modules": "^3.3.0",
+		"esbuild": "^0.21.5",
+		"obsidian": "latest",
+		"tslib": "^2.6.2",
+		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"@kenjiuno/msgreader": "^1.22.0",
+		"postal-mime": "^2.7.4",
+		"turndown": "^7.2.0"
+	}
+}

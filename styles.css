@@ -1,0 +1,8 @@
+/* Email to Task — settings styling */
+
+.email-to-task-setting-template textarea {
+	width: 100%;
+	min-height: 12em;
+	font-family: var(--font-monospace);
+	resize: vertical;
+}
