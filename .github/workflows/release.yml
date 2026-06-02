@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. 0.1.0)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify artifact files exist
+        run: |
+          for f in dist/main.js dist/manifest.json dist/styles.css; do
+            test -f "$f" || { echo "Missing $f"; exit 1; }
+          done
+
+      - name: Create release with plugin files
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          name: Email to Task ${{ inputs.tag || github.ref_name }}
+          body: |
+            Obsidian **Email to Task** plugin.
+
+            Install: download `main.js`, `manifest.json`, and `styles.css` below
+            into `<vault>/.obsidian/plugins/email-to-task/`, then enable the
+            plugin in Settings → Community plugins.
+          files: |
+            dist/main.js
+            dist/manifest.json
+            dist/styles.css
